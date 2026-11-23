@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Топ-50 крутых решений с GitHub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800;900&family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: экспертный шут — «вот 50 бесплатных штук, которые за тебя работают», с юмором и честными оговорками
+   IDEA: витрина «склад бесплатного софта»: терминал, который печатает, и карточки-репозитории в окнах браузера
+   PICTURE: печатающий терминал + веер настоящих скриншотов из репозиториев в первом экране
+   COLOUR and TYPE: чёрный графит, ярко-розовый, лайм для кода, кремовые вставки; Unbounded + Manrope + JetBrains Mono
+   LAYOUT: герой → бегущая строка → «GitHub на пальцах» → три типа установки → фильтры → 5 подборок с вставками → CTA */
+:root{color-scheme:dark;--ink:#0c0c0e;--panel:#16161a;--line:#2a2a31;--pink:#ff2e88;--lime:#c6ff3d;--red:#ff3b2f;--cream:#f7efe4;--mut:#a9a4b0;--w:#fff}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:130px;overflow-x:clip}
+body{margin:0;background:var(--ink);color:var(--w);font:16px/1.55 Manrope,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Unbounded,Manrope,sans-serif;line-height:1.05;margin:0;text-wrap:balance}
+a{color:inherit}
+code,.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.band{padding:clamp(40px,6vw,90px) max(5vw,16px);position:relative}
+.wrap{max-width:1240px;margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 22px;border-radius:999px;border:2px solid currentColor;background:none;color:inherit;font:800 16px Manrope,system-ui,sans-serif;cursor:pointer;text-decoration:none;transition:transform .15s}
+.btn:active{transform:scale(.96)}
+.btn.pk{background:var(--pink);border-color:var(--pink);color:#fff}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);align-items:center;min-height:calc(100svh - 40px);overflow:hidden}
+.hero h1{font-size:clamp(38px,5.6vw,74px);font-weight:900}
+.hero h1 .n{color:var(--pink);display:inline-block}
+.hero h1 .gh{color:var(--lime)}
+.lead{color:var(--mut);font-size:clamp(16px,1.4vw,19px);max-width:560px;margin:18px 0 24px}
+.by{font-size:14px;color:var(--mut);margin-top:20px}
+.acts{display:flex;flex-wrap:wrap;gap:12px}
+.term{background:#0a0a0c;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(255,46,136,.18)}
+.term .bar{display:flex;gap:7px;padding:12px 14px;background:#141418;border-bottom:1px solid var(--line)}
+.term .bar i{width:12px;height:12px;border-radius:50%;background:#ff5f57}.term .bar i:nth-child(2){background:#febc2e}.term .bar i:nth-child(3){background:#28c840}
+.term pre{margin:0;padding:18px;font:500 14px/1.7 "JetBrains Mono",monospace;color:#d8d8e0;min-height:220px;white-space:pre-wrap}
+.term .p{color:var(--lime)}.term .k{color:var(--pink)}
+.caret{display:inline-block;width:9px;height:1.1em;background:var(--lime);vertical-align:-2px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.fan{position:relative;height:200px;margin-top:-30px}
+.fan img{position:absolute;width:52%;border-radius:12px;border:3px solid #fff;box-shadow:0 14px 40px rgba(0,0,0,.6);aspect-ratio:16/10;object-fit:cover;object-position:top}
+.fan img:nth-child(1){left:0;top:30px;transform:rotate(-8deg)}
+.fan img:nth-child(2){left:24%;top:0;transform:rotate(2deg);z-index:2}
+.fan img:nth-child(3){right:0;top:36px;transform:rotate(9deg)}
+/* marquee */
+.mq{background:var(--lime);color:var(--ink);overflow:hidden;padding:16px 0;transform:rotate(-1.5deg);margin:10px -10px}
+.mq div{white-space:nowrap;font:900 clamp(26px,4.4vw,54px)/1 Unbounded}
+/* explainer */
+.cream{background:var(--cream);color:var(--ink)}
+.h2{font-size:clamp(30px,4.2vw,50px)}
+.sub{font-size:18px;max-width:700px;margin:14px 0 0;opacity:.8}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
+.tile{background:#fff;border:2px solid var(--ink);border-radius:22px;padding:22px;box-shadow:6px 6px 0 var(--ink)}
+.tile .big{font:900 44px/1 Unbounded;color:var(--pink)}
+.tile h3{font-size:20px;margin:12px 0 8px}
+.tile p{margin:0}
+.tile code{background:var(--ink);color:var(--lime);padding:2px 7px;border-radius:6px;font-size:13px}
+.lvl1{color:#0a8f4d}.lvl2{color:#c2410c}.lvl3{color:#7c3aed}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
+.how .tile{box-shadow:6px 6px 0 var(--pink)}
+.dot{display:inline-flex;align-items:center;gap:8px;font:800 14px Manrope,system-ui,sans-serif;padding:5px 12px;border-radius:999px;background:var(--ink);color:#fff}
+.dot b{width:10px;height:10px;border-radius:50%}
+.d1 b{background:var(--lime)}.d2 b{background:#ffb020}.d3 b{background:#a78bfa}
+/* sticky filters */
+.filt{position:sticky;top:0;z-index:30;background:rgba(12,12,14,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px max(5vw,16px)}
+.frow{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{flex:none;min-height:44px;padding:8px 16px;border-radius:999px;border:2px solid var(--line);background:none;color:#fff;font:800 14px Manrope,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed=true]{background:var(--pink);border-color:var(--pink)}
+.srch{flex:1 1 200px;min-height:44px;border-radius:999px;border:2px solid var(--line);background:#111114;color:#fff;font:16px Manrope,system-ui,sans-serif;padding:8px 18px}
+.cnt{font:800 14px Manrope,system-ui,sans-serif;color:var(--mut)}
+/* sections */
+.cat{border-top:1px solid var(--line)}
+.cat .hd{display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:end;margin-bottom:34px}
+.cat .num{font:900 clamp(80px,12vw,160px)/.8 Unbounded;color:transparent;-webkit-text-stroke:2px var(--pink)}
+.cat .hd p{margin:10px 0 0;color:var(--mut);font-size:17px;max-width:640px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s,box-shadow .25s}
+.card:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 20px 50px rgba(255,46,136,.18)}
+.card.hide{display:none}
+.shot{position:relative;background:#0a0a0c;border-bottom:1px solid var(--line)}
+.shot .chrome{display:flex;gap:6px;align-items:center;padding:8px 12px;background:#1d1d22}
+.shot .chrome i{width:9px;height:9px;border-radius:50%;background:#3a3a42}
+.shot .chrome span{margin-left:8px;font:500 11px "JetBrains Mono",ui-monospace,monospace;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shot .im{aspect-ratio:16/10;overflow:hidden}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 4s ease}
+.card:hover .shot img{transform:scale(1.06)}
+.mock{width:100%;height:100%;padding:16px;font:500 12.5px/1.65 "JetBrains Mono",ui-monospace,monospace;color:#d8d8e0;background:radial-gradient(circle at 80% 0,rgba(255,46,136,.25),transparent 55%),#0a0a0c;overflow:hidden}
+.mock .p{color:var(--lime)}.mock .c{color:var(--mut)}
+.mock .tag{position:absolute;right:10px;bottom:10px;font:800 11px Manrope,system-ui,sans-serif;background:#ffffff14;padding:3px 9px;border-radius:999px;color:var(--mut)}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.card h3{font-size:21px}
+.repo{font:500 13px "JetBrains Mono",ui-monospace,monospace;color:var(--mut);overflow-wrap:anywhere}
+.no{font:900 13px Unbounded;color:var(--pink);white-space:nowrap}
+.card p{margin:0;font-size:15.5px}
+.why{background:#ffffff0a;border-left:3px solid var(--lime);padding:10px 12px;border-radius:0 10px 10px 0;font-size:15px}
+.why b{color:var(--lime)}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{font:800 12.5px Manrope,system-ui,sans-serif;padding:3px 10px;border-radius:999px;background:#ffffff12}
+details{border:1px solid var(--line);border-radius:14px;background:#0f0f12}
+summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:900 20px Unbounded;color:var(--pink);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+ol{margin:0;padding:0 14px 14px 34px;display:grid;gap:8px;font-size:15px}
+.cmd{display:flex;align-items:stretch;gap:0;margin-top:4px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.cmd code{flex:1;padding:9px 11px;background:#060608;color:var(--lime);font-size:13px;overflow-x:auto;white-space:pre}
+.cmd button{border:0;background:var(--pink);color:#fff;font:800 13px Manrope,system-ui,sans-serif;padding:0 14px;cursor:pointer;min-width:44px}
+.go{margin-top:auto;display:flex;gap:8px;padding-top:4px}
+.go a{flex:1;min-height:46px;font-size:15px;border-color:#fff}
+.go a:hover{background:#fff;color:var(--ink)}
+/* inserts */
+.ins{display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center;max-width:960px;margin:50px auto 0;padding:24px 28px;border-radius:26px;background:var(--cream);color:var(--ink);transform:rotate(-.8deg)}
+.ins.pk{background:var(--pink);color:#fff;transform:rotate(.8deg)}
+.ins .em{font:900 54px/1 Unbounded}
+.ins b{font-family:Unbounded;display:block;margin-bottom:6px;font-size:18px}
+.ins p{margin:0}
+/* final */
+.final{text-align:center;overflow:hidden;border-top:1px solid var(--line)}
+.final h2{font-size:clamp(32px,5vw,62px);max-width:1000px;margin:0 auto}
+.final h2 span{color:var(--pink)}
+.final p{max-width:660px;margin:20px auto 30px;color:var(--mut);font-size:18px}
+.final .btn.pk{font-size:18px;min-height:60px;padding:16px 34px}
+.glow{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,46,136,.4),transparent 65%);left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
+.soc{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:38px}
+.soc a{min-height:44px;padding:10px 18px;border-radius:999px;background:#1d1d22;text-decoration:none;font-weight:800}
+.soc a:hover{background:var(--pink)}
+.small{font-size:13px;color:var(--mut);margin-top:24px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--lime);color:var(--ink);font-weight:800;padding:12px 20px;border-radius:999px;z-index:60;transition:transform .3s}
+.toast.on{transform:translate(-50%,0)}
+.empty{display:none;text-align:center;color:var(--mut);padding:60px 16px;font-size:18px}
+@media(max-width:900px){.hero{grid-template-columns:1fr;min-height:auto}.three,.how{grid-template-columns:1fr}.fan{height:160px}}
+@media(max-width:700px){.frow{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.frow::-webkit-scrollbar{display:none}.srch{flex:0 0 220px}html{scroll-padding-top:120px}}
+@media(max-width:600px){.cat .hd{grid-template-columns:1fr;gap:4px}.ins{grid-template-columns:1fr;padding:20px}.ins .em{font-size:40px}.term pre{font-size:12.5px;min-height:190px}.filt{padding:10px 12px}.chip{padding:8px 12px;font-size:13px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<section class="band hero">
+  <div>
+    <h1>Топ-<span class="n" id="n50">50</span> крутых решений с <span class="gh">GitHub</span></h1>
+    <p class="lead">Бесплатные программы с открытым кодом, которые пишут код, отвечают клиентам, считают аналитику, режут PDF и делают за тебя ещё сотню скучных дел. Для каждой: что это, зачем тебе, скрин, ссылка и установка по шагам. Без «ну там разберёшься».</p>
+    <div class="acts">
+      <a class="btn pk" href="#explain">Я не айтишник, мне можно? ↓</a>
+      <a class="btn" href="#c1">Сразу к списку</a>
+    </div>
+    <p class="by">Лиза Полякова · мастер в продажах и маркетинге · внедряю ИИ в бизнес</p>
+  </div>
+  <div>
+    <div class="term" aria-label="Терминал печатает команды">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <pre id="tp"></pre>
+    </div>
+    <div class="fan" aria-hidden="true">
+      <img src="img/flowiseai__flowise.webp" alt="">
+      <img src="img/charmbracelet__crush.webp" alt="">
+      <img src="img/n8n-io__n8n.webp" alt="">
+    </div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div id="mqt"></div></div>
+
+<section class="band cream" id="explain">
+  <div class="wrap">
+    <h2 class="h2 rv">GitHub на пальцах за 30 секунд</h2>
+    <p class="sub rv">Это не секта программистов, а огромный бесплатный склад программ. Чтобы там не потеряться, хватит трёх слов.</p>
+    <div class="three">
+      <div class="tile"><div class="big">📁</div><h3>Репозиторий</h3><p>Папка проекта с открытым кодом. Ссылка вида <code>github.com/автор/проект</code>. Главное — читать файл README внизу страницы: это инструкция.</p></div>
+      <div class="tile"><div class="big">★</div><h3>Звёзды</h3><p>Лайки от разработчиков. Тысячи звёзд + свежие обновления = проекту можно доверять. 12 звёзд и последний коммит в 2019-м = беги.</p></div>
+      <div class="tile"><div class="big">⬇</div><h3>Releases</h3><p>Справа на странице проекта. Там лежат готовые установщики: скачал .exe или .dmg — поставил. Никакого кода.</p></div>
+    </div>
+    <h2 class="h2 rv" style="margin-top:60px">Три способа установки</h2>
+    <p class="sub rv">У каждой карточки есть метка. Смотри на неё и выбирай по силам.</p>
+    <div class="how">
+      <div class="tile"><span class="dot d1"><b></b>Скачал и запустил</span><h3>Как обычная программа</h3><p>Установщик с сайта или из Releases. Справится даже бабушка, если ей пообещать внуков.</p></div>
+      <div class="tile"><span class="dot d2"><b></b>Одна команда</span><h3>Через терминал</h3><p>Windows: Пуск → «Терминал». Mac: Spotlight → «Терминал». Вставляешь команду из карточки, жмёшь Enter. Иногда сначала нужен Python (python.org) или Node.js (nodejs.org).</p></div>
+      <div class="tile"><span class="dot d3"><b></b>Через Docker</span><h3>Свой сервер в коробке</h3><p>Ставишь Docker Desktop (docker.com) — и запускаешь целые сервисы командой. Для CRM, аналитики и рассылок, которые живут у тебя, а не у дяди.</p></div>
+    </div>
+  </div>
+</section>
+
+<nav class="filt" aria-label="Фильтры">
+  <div class="frow" id="cats"></div>
+  <div class="frow" style="margin-top:8px">
+    <button class="chip" data-l="0" aria-pressed="true">Любая сложность</button>
+    <button class="chip" data-l="1" aria-pressed="false">Скачал и запустил</button>
+    <button class="chip" data-l="2" aria-pressed="false">Одна команда</button>
+    <button class="chip" data-l="3" aria-pressed="false">Docker</button>
+    <input class="srch" id="q" type="search" placeholder="Поиск: PDF, CRM, видео, агент…" aria-label="Поиск по решениям">
+    <span class="cnt" id="cnt">50 из 50</span>
+  </div>
+</nav>
+
+<main id="list"></main>
+<p class="empty" id="empty">Ничего не нашлось. Попробуй другое слово — например, «звонки» или «таблица».</p>
+
+<section class="band final" id="cta">
+  <div class="glow"></div>
+  <div class="wrap" style="position:relative">
+    <h2 class="rv">Скачать 50 программ легко. <span>Собрать из них систему, которая продаёт, — вот где магия.</span></h2>
+    <p>Если хочешь не коллекционировать репозитории, а собрать своего ИИ-сотрудника под свои задачи, приходи на бесплатный практикум «Вайбкодинг: от регистрации до результата». Делаем вместе, в прямом эфире, без программистов.</p>
+    <a class="btn pk" href="https://lp.aibasis.ru/liza/?utm_source=LM&utm_medium=inst&utm_campaign=liza">Хочу на практикум →</a>
+    <div class="soc">
+      <a href="https://instagram.com/lizon_polyakova">Instagram @lizon_polyakova</a>
+      <a href="https://t.me/elizabot_ai">Telegram @elizabot_ai</a>
+      <a href="https://youtube.com/@lizavetapolyackova">YouTube @lizavetapolyackova</a>
+      <a href="https://tiktok.com/@elizabot_ai">TikTok @elizabot_ai</a>
+    </div>
+    <p class="small">Скриншоты взяты из самих репозиториев и с сайтов проектов. Где скрина нет, показан терминал или схема. Подборка актуальна на ноябрь 2026: команды установки иногда меняются, при сомнениях сверяйся с README проекта.</p>
+  </div>
+</section>
+<div class="toast" id="toast">Скопировано</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+{
+const IMGS='aaif-goose__goose,activepieces__activepieces,aider-ai__aider,appflowy-io__appflowy,autohotkey__autohotkey,baptistearno__typebot.io,bram2w__baserow,browser-use__browser-use,browserbase__stagehand,calcom__cal.com,charmbracelet__crush,chatwoot__chatwoot,cline__cline,coderamp-labs__gitingest,espanso__espanso,excalidraw__excalidraw,firecrawl__firecrawl,flowiseai__flowise,formbricks__formbricks,janhq__jan,knadh__listmonk,langflow-ai__langflow,langgenius__dify,localsend__localsend,mcp-use__mcp-use,microsoft__powertoys,mintplex-labs__anything-llm,n8n-io__n8n,nocodb__nocodb,openai__whisper,plandex-ai__plandex,ramonunch__altsnap,sharex__sharex,stirling-tools__stirling-pdf,syncthing__syncthing,szarkans__multi,twentyhq__twenty,upscayl__upscayl,yamadashy__repomix'.split(',');
+const CATS=[
+ {t:'ИИ-агенты и вайбкодинг',s:'Программы, которые не болтают, а делают: пишут код, ставят зависимости, кликают по сайтам и сами себя проверяют.',ins:['🧠','Сначала один агент, потом остальные','Не ставь всех 14 разом. Возьми одного (для старта — Cline или goose), сделай на нём одну реальную задачу. Зоопарк агентов без задач — это просто зоопарк.']},
+ {t:'Свой ИИ у себя на компьютере',s:'Нейросети, которые работают без интернета и без подписки. Клиентские данные никуда не утекают.',ins:['🔒','Локально — не значит «бесплатно для ноутбука»','Модели едят память. Для старта хватит 16 ГБ ОЗУ и маленькой модели. Если ноут взлетает как самолёт — возьми модель поменьше, а не новый ноут.'],pk:1},
+ {t:'Автоматизация и боты',s:'Связать CRM, почту, Телеграм и нейросеть в одну цепочку. Тот самый «ИИ-сотрудник», только из кубиков.',ins:['⚡','Автоматизируй то, что бесит','Выпиши 3 действия, которые ты делаешь каждый день руками: перенести заявку, ответить на типовой вопрос, собрать отчёт. Вот твой первый сценарий для n8n.']},
+ {t:'Бизнес, продажи и клиенты',s:'Бесплатные аналоги платных сервисов: CRM, онлайн-чат, запись на встречи, аналитика, рассылки. Данные хранятся у тебя.',ins:['🛡','Безопасность — не паранойя','Сервис с данными клиентов поднимай на нормальном сервере, с паролями и бэкапами. «Запустил на ноуте и забыл» — сценарий фильма ужасов.'],pk:1},
+ {t:'Утилиты и контент',s:'Маленькие программы, которые экономят по 10 минут в день. За год набегает отпуск.'}
+];
+/* [cat, repo, name, lvl 1/2/3, ОС, what, why, steps ('$ ' = команда)] */
+const R=[
+[1,'aaif-goose/goose','goose',1,'Win · Mac · Linux','Открытый ИИ-агент: приложение для компьютера, терминал и API. Сам ставит зависимости, запускает команды, правит файлы и проверяет результат.','Собрать агента под свои процессы: подключаешь любую модель и MCP-инструменты — и он делает задачу от начала до конца.',['Открой страницу проекта → Releases → скачай goose Desktop для своей системы.','При первом запуске выбери провайдера модели (Anthropic, OpenAI, OpenRouter или локальная Ollama) и вставь ключ.','Напиши задачу обычными словами — например, «собери лендинг из этого текста».']],
+[1,'charmbracelet/crush','Crush',2,'Win · Mac · Linux','Красивый ИИ-кодер прямо в терминале. Работает с разными моделями, помнит контекст проекта, подключает MCP и держит несколько сессий.','Если терминал не пугает: быстрый и симпатичный помощник для мини-сервисов и скриптов.',['Поставь через Homebrew или npm:','$ brew install charmbracelet/tap/crush','или','$ npm install -g @charmland/crush','Зайди в папку проекта и запусти:','$ crush']],
+[1,'plandex-ai/plandex','Plandex',2,'Mac · Linux · WSL','Агент для больших задач, где одного промпта мало: разбивает работу на план, меняет много файлов и доводит дело до конца.','Когда проект вырос из «сделай кнопку» в «перепиши половину сайта».',['Установи одной командой (Windows — через WSL):','$ curl -sL https://plandex.ai/install.sh | bash','Зайди в папку проекта и запусти:','$ plandex']],
+[1,'szarkans/multi','multi',2,'Mac · Linux','Гоняет одну задачу через несколько ИИ сразу — Claude, Codex, OpenCode, Gemini — и показывает, где они согласны, а где спорят.','Код-ревью «на два мнения»: один агент пропустил баг, второй заметил. Решаешь ты.',['Нужен хотя бы один установленный агент (Claude Code, Codex, Gemini CLI) или ключ OpenRouter.','Открой README на странице проекта — там команда установки и примеры.','Проект молодой (мало звёзд): отличная игрушка для экспериментов, не для продакшена.']],
+[1,'All-Hands-AI/OpenHands','OpenHands',3,'Win · Mac · Linux','Одна из самых известных открытых платформ ИИ-разработчиков: агент пишет код, запускает его в песочнице и сам исправляет ошибки.','Отдать агенту целую задачу «под ключ» и посмотреть, что получится, — без подписок на закрытые сервисы.',['Поставь Docker Desktop (docker.com).','В README найди раздел про локальный запуск и скопируй команду.','Открой адрес из инструкции в браузере, укажи модель и ключ.']],
+[1,'Aider-AI/aider','Aider',2,'Win · Mac · Linux','Парное программирование с ИИ в терминале. Правит код в твоём проекте и сам делает аккуратные коммиты в git.','Дорабатывать существующие проекты маленькими шагами, без копипасты из чата.',['Нужен Python 3. Установи aider:','$ python -m pip install aider-install','$ aider-install','Зайди в папку проекта и запусти, подставив свой ключ:','$ aider --model sonnet --api-key anthropic=ТВОЙ_КЛЮЧ']],
+[1,'cline/cline','Cline',1,'Win · Mac · Linux','ИИ-агент внутри редактора VS Code: создаёт файлы, запускает команды и каждый шаг спрашивает разрешения.','Самый мягкий вход в вайбкодинг: всё видно, всё под контролем, ничего не делается без твоего «ок».',['Поставь VS Code (code.visualstudio.com).','Слева «Extensions» → найди «Cline» → Install.','Открой Cline, выбери провайдера и вставь API-ключ.']],
+[1,'browser-use/browser-use','Browser Use',2,'Win · Mac · Linux','Даёт ИИ-агенту управлять браузером: открывать сайты, кликать, заполнять формы, собирать данные.','Автоматизировать рутину на сайтах без API: выгрузки из кабинетов, мониторинг цен, заполнение заявок.',['Нужен Python 3.11+. Установи библиотеку:','$ pip install browser-use','Возьми пример из README (10 строк), вставь свой ключ модели и запусти.']],
+[1,'browserbase/stagehand','Stagehand',2,'Win · Mac · Linux','SDK для браузерных агентов: находит элементы по смыслу («нажми Купить»), а не по хрупким координатам.','Скрипты для сайтов, которые не ломаются от каждой смены дизайна.',['Нужен Node.js. Создай готовый проект одной командой:','$ npx create-browser-app','Дальше следуй подсказкам мастера и вставь ключ модели.']],
+[1,'mcp-use/mcp-use','mcp-use',2,'Win · Mac · Linux','Конструктор ИИ-агентов и MCP-серверов: через них модель получает доступ к внешним инструментам. Есть Inspector для проверки.','Сделать свой коннектор — например, «ИИ видит мою CRM» — и проверить, что он реально работает.',['Python-версия:','$ pip install mcp-use','Или TypeScript-шаблон:','$ npx create-mcp-use-app']],
+[1,'coderamp-labs/gitingest','Gitingest',1,'Браузер','Превращает любой GitHub-репозиторий в одну понятную текстовую выжимку для нейросети.','Скормить ИИ чужой проект целиком и спросить «как это работает и что тут можно украсть себе».',['Самый простой путь: в ссылке на репозиторий замени github.com на gitingest.com и открой в браузере.','Для терминала:','$ pip install gitingest','$ gitingest https://github.com/автор/проект']],
+[1,'yamadashy/repomix','Repomix',2,'Win · Mac · Linux','Упаковывает весь твой проект в один файл, удобный для нейросети. Есть веб-версия и расширение.','Показать ИИ весь свой код разом, а не по кусочкам: «найди, где ломается оплата».',['Нужен Node.js. В папке проекта:','$ npx repomix','Рядом появится файл repomix-output.xml — загрузи его в чат с ИИ.']],
+[1,'github/spec-kit','Spec Kit',2,'Win · Mac · Linux','Набор от самого GitHub для разработки «от спецификации»: сначала описываешь, что нужно, потом агент строит по плану.','Чтобы вайбкодинг не превращался в хаос: сначала ТЗ, потом код.',['Нужен uv (менеджер Python). Создай проект:','$ uvx --from git+https://github.com/github/spec-kit.git specify init мой-проект','Открой проект в своём агенте и следуй командам из README.']],
+[1,'microsoft/markitdown','MarkItDown',2,'Win · Mac · Linux','Утилита от Microsoft: превращает PDF, Word, Excel, PowerPoint и даже картинки в аккуратный Markdown для нейросетей.','Загрузить в ИИ договоры, прайсы и презентации так, чтобы он их нормально понял.',['Нужен Python 3.10+:','$ pip install \'markitdown[all]\'','Конвертируй файл:','$ markitdown прайс.pdf > прайс.md']],
+[2,'ollama/ollama','Ollama',1,'Win · Mac · Linux','Самый простой способ запускать нейросети у себя на компьютере. Скачал модель — общаешься без интернета.','Работать с конфиденциальными данными клиентов, не отправляя их в облако.',['Скачай установщик с ollama.com и поставь.','Открой терминал и запусти любую модель, например:','$ ollama run gemma3']],
+[2,'open-webui/open-webui','Open WebUI',2,'Win · Mac · Linux','Интерфейс «как у ChatGPT» для своих моделей: чаты, загрузка документов, несколько пользователей.','Сделать команде свой внутренний ИИ-чат на базе Ollama или любого API.',['Нужен Python 3.11:','$ pip install open-webui','$ open-webui serve','Открой в браузере http://localhost:8080']],
+[2,'janhq/jan','Jan',1,'Win · Mac · Linux','Приложение-чат с нейросетями, которые работают офлайн у тебя на компьютере. Можно подключить и облачные модели.','Личный ИИ-помощник без подписки и без слива переписки.',['Скачай установщик с jan.ai.','Во вкладке Hub выбери модель под свой компьютер и скачай.','Начни новый чат.']],
+[2,'Mintplex-Labs/anything-llm','AnythingLLM',1,'Win · Mac · Linux','Всё-в-одном: чат с твоими документами, агенты и база знаний. Работает с локальными и облачными моделями.','База знаний отдела продаж: загрузил регламенты и скрипты — менеджеры спрашивают у ИИ, а не у РОПа в 23:00.',['Скачай Desktop-версию с anythingllm.com.','Выбери модель (можно локальную через Ollama).','Создай workspace и перетащи туда документы.']],
+[2,'danny-avila/LibreChat','LibreChat',3,'Win · Mac · Linux','Открытый клон ChatGPT, где в одном окне живут Claude, GPT, Gemini и другие модели. Агенты, файлы, пользователи.','Один корпоративный чат с разными нейросетями и общими ключами.',['Нужны git и Docker:','$ git clone https://github.com/danny-avila/LibreChat.git','$ cd LibreChat && cp .env.example .env','$ docker compose up -d','Открой http://localhost:3080']],
+[2,'comfyanonymous/ComfyUI','ComfyUI',1,'Win · Mac · Linux','Мощный конструктор генерации картинок и видео из блоков. Тот самый, на котором делают крутые визуалы.','Креативы, обложки, карточки товаров — свои, без лимитов генераций. Нужна хорошая видеокарта.',['Скачай ComfyUI Desktop с comfy.org.','При первом запуске программа скачает базовую модель.','Начни с готового шаблона из меню Workflow → Templates.']],
+[2,'openai/whisper','Whisper',2,'Win · Mac · Linux','Нейросеть от OpenAI, которая расшифровывает аудио и видео в текст. Русский понимает отлично.','Расшифровать звонки менеджеров, созвоны и эфиры, а потом отдать текст ИИ на разбор.',['Нужны Python и ffmpeg (ffmpeg.org). Установи:','$ pip install -U openai-whisper','Расшифруй файл:','$ whisper звонок.mp3 --language Russian --model medium']],
+[2,'upscayl/upscayl','Upscayl',1,'Win · Mac · Linux','Увеличивает и улучшает картинки нейросетью. Мыльное фото превращается в чёткое.','Спасти старые фото товаров и сделать из маленькой картинки обложку.',['Скачай с upscayl.org.','Перетащи картинку, выбери модель и папку.','Нажми Upscayl.']],
+[3,'n8n-io/n8n','n8n',2,'Win · Mac · Linux','Визуальный конструктор автоматизаций с ИИ-агентами и сотнями интеграций. Блоки соединяются стрелочками.','Заявка с сайта → ИИ квалифицирует → карточка в CRM → сообщение менеджеру в Телеграм. Без программиста.',['Нужен Node.js. Запусти:','$ npx n8n','Открой http://localhost:5678 и создай первый сценарий.']],
+[3,'langgenius/dify','Dify',3,'Win · Mac · Linux','Платформа для ИИ-приложений: чат-боты, агенты, базы знаний и сценарии в визуальном редакторе.','Собрать бота-консультанта по своим документам и встроить на сайт.',['Нужны git и Docker:','$ git clone https://github.com/langgenius/dify.git','$ cd dify/docker && cp .env.example .env','$ docker compose up -d','Открой http://localhost/install']],
+[3,'FlowiseAI/Flowise','Flowise',2,'Win · Mac · Linux','Собираешь ИИ-агентов и цепочки перетаскиванием блоков, как в конструкторе.','Быстрый прототип бота: «отвечает по прайсу, записывает на встречу».',['Нужен Node.js:','$ npm install -g flowise','$ npx flowise start','Открой http://localhost:3000']],
+[3,'langflow-ai/langflow','Langflow',2,'Win · Mac · Linux','Визуальный редактор ИИ-агентов и RAG: компоненты на холсте, готовые шаблоны, экспорт в API.','Собрать агента с инструментами и сразу получить API для сайта или CRM.',['Нужен Python 3.10+:','$ pip install langflow','$ langflow run','Открой http://localhost:7860']],
+[3,'baptisteArno/typebot.io','Typebot',1,'Облако или Docker','Конструктор красивых чат-ботов для сайта и мессенджеров: вопросы, кнопки, ветки, ИИ-блоки.','Квиз-воронка на сайте вместо скучной формы — конверсия обычно говорит спасибо.',['Самый быстрый путь — облачная версия на typebot.io.','Для своего сервера — инструкция по Docker в документации проекта.']],
+[3,'firecrawl/firecrawl','Firecrawl',2,'Облако или Docker','Превращает любой сайт в чистый текст или Markdown для нейросети: обходит страницы и вытаскивает контент.','Собрать базу конкурентов, их цены и офферы — и отдать ИИ на анализ.',['Проще всего — облако firecrawl.dev: регистрируешься и получаешь API-ключ.','Своя установка — по файлу SELF_HOST.md в репозитории (через Docker).']],
+[3,'unclecode/crawl4ai','Crawl4AI',2,'Win · Mac · Linux','Открытый парсер сайтов «для ИИ»: быстро собирает страницы в Markdown и структурированные данные.','Мониторинг сайтов конкурентов и сбор лидов из открытых каталогов.',['Нужен Python:','$ pip install -U crawl4ai','$ crawl4ai-setup','Спарсь страницу:','$ crwl https://example.com -o markdown']],
+[3,'activepieces/activepieces','Activepieces',3,'Облако или Docker','Открытая альтернатива Zapier с ИИ-блоками и сотнями готовых шаблонов.','Автоматизации для команды без кода: проще n8n, хватает для 80% задач.',['Есть облачная версия на activepieces.com.','Свой сервер — через Docker по инструкции в документации.']],
+[4,'twentyhq/twenty','Twenty',3,'Облако или Docker','Современная открытая CRM — альтернатива Salesforce. Компании, сделки, задачи, свои поля.','CRM, которую можно допилить под свой процесс продаж и подружить с ИИ.',['Есть облако на twenty.com.','Свой сервер — Docker Compose по инструкции в документации.']],
+[4,'chatwoot/chatwoot','Chatwoot',3,'Облако или Docker','Единое окно поддержки: чат на сайте, почта, мессенджеры, соцсети. Есть ИИ-помощник оператора.','Собрать все входящие от клиентов в одно место — ни одна заявка больше не теряется.',['Облачная версия на chatwoot.com.','Свой сервер — Docker по документации.']],
+[4,'calcom/cal.com','Cal.com',1,'Облако или Docker','Открытая альтернатива Calendly: клиент сам выбирает время встречи по твоему календарю.','Убрать переписку «а вам удобно в четверг?» — ссылка, слот, готово.',['Самое простое — зарегистрироваться на cal.com.','Свой сервер — Docker по документации проекта.']],
+[4,'nocodb/nocodb','NocoDB',3,'Docker','Превращает базу данных в удобную таблицу как Airtable: виды, формы, канбан, API.','База клиентов или товаров, с которой работает команда, а автоматизации подключаются через API.',['Нужен Docker:','$ docker run -d -p 8080:8080 nocodb/nocodb:latest','Открой http://localhost:8080']],
+[4,'bram2w/baserow','Baserow',3,'Облако или Docker','Ещё одна открытая альтернатива Airtable: таблицы без кода, формы, приложения.','Трекер лидов или контент-план, который не зависит от чужих сервисов.',['Облако на baserow.io или Docker:','$ docker run -d -p 80:80 -v baserow_data:/baserow/data baserow/baserow:latest','Открой http://localhost']],
+[4,'umami-software/umami','Umami',3,'Docker','Простая и приватная веб-аналитика: посещения, источники, страницы — без кук и тяжёлых счётчиков.','Видеть, откуда приходят люди на лендинг, без лишнего шума.',['Нужны git и Docker:','$ git clone https://github.com/umami-software/umami.git','$ cd umami && docker compose up -d','Открой http://localhost:3000 (логин admin, пароль umami — сразу смени!)']],
+[4,'knadh/listmonk','listmonk',3,'Docker','Свой сервис email-рассылок: списки, шаблоны, аналитика. Один файл, очень быстрый.','Рассылки по базе без ежемесячной оплаты за каждого подписчика.',['Скачай docker-compose.yml из репозитория в пустую папку.','$ docker compose up -d','Открой http://localhost:9000']],
+[4,'formbricks/formbricks','Formbricks',3,'Облако или Docker','Опросы и сбор обратной связи: на сайте, в продукте, по ссылке. Открытая альтернатива Typeform.','Спросить клиентов, почему они не купили, — и наконец узнать правду.',['Облако на formbricks.com.','Свой сервер — Docker по документации.']],
+[4,'AppFlowy-IO/AppFlowy','AppFlowy',1,'Win · Mac · Linux','Открытая альтернатива Notion: документы, базы, канбан, ИИ-помощник. Данные можно хранить у себя.','Вики компании и база знаний, которую не отключат.',['Скачай приложение с appflowy.com.','Создай рабочее пространство и импортируй страницы.']],
+[5,'ShareX/ShareX','ShareX',1,'Windows','Скриншоты, запись экрана и GIF, пометки, распознавание текста. После захвата можно настроить цепочку действий.','Быстро показать менеджеру, где ошибка в CRM, — стрелочкой, а не тремя абзацами.',['Скачай с getsharex.com или из Microsoft Store.','Проверь настройки загрузки, чтобы скрины случайно не улетали в интернет.']],
+[5,'RamonUnch/AltSnap','AltSnap',1,'Windows','Держишь Alt — двигаешь и меняешь размер окон, хватая их за любое место.','Мелочь, а через неделю без неё работать больно.',['Скачай установщик в Releases на GitHub.','Или через Chocolatey:','$ choco install altsnap']],
+[5,'AutoHotkey/AutoHotkey','AutoHotkey',1,'Windows','Горячие клавиши, автозамена текста и сценарии для повторяющихся действий в Windows.','Вбил «спс» — получил готовую фразу клиенту. Менеджеры экономят часы в неделю.',['Скачай AutoHotkey v2 с autohotkey.com.','Создай файл скрипт.ahk с такой строкой и запусти его двойным кликом:','$ ::спс::Спасибо за заявку! Свяжусь с вами в течение часа.']],
+[5,'syncthing/syncthing','Syncthing',1,'Win · Mac · Linux · Android','Синхронизирует папки между устройствами напрямую, без облака.','Рабочие файлы и заметки одинаковые на ноуте и компе. Но это не замена резервной копии!',['Скачай с syncthing.net для каждого устройства.','Открой http://127.0.0.1:8384, добавь второе устройство по ID и выбери папку.']],
+[5,'localsend/localsend','LocalSend',1,'Все платформы','Передаёт файлы и текст между компьютером и телефоном по локальной сети. Без аккаунта и облака.','Скинуть видео с телефона на ноут за секунды, а не через «отправлю себе в Телеграм».',['Скачай с localsend.org или из магазина приложений.','На Windows можно так:','$ winget install LocalSend.LocalSend']],
+[5,'microsoft/PowerToys','PowerToys',1,'Windows','Набор суперспособностей от Microsoft: раскладка окон, пипетка цвета, распознавание текста с экрана, массовое переименование.','Десяток мелких «как я раньше жил без этого» в одной программе.',['Установи через winget:','$ winget install Microsoft.PowerToys -s winget','Включи нужные модули в настройках.']],
+[5,'espanso/espanso','Espanso',1,'Win · Mac · Linux','Кроссплатформенная автозамена текста: пишешь сокращение — получаешь готовую фразу, подпись или шаблон.','Шаблоны ответов клиентам в любом окне: почта, CRM, мессенджеры.',['Скачай с espanso.org.','Открой файл match/base.yml и добавь свою замену по примеру из документации.']],
+[5,'yt-dlp/yt-dlp','yt-dlp',2,'Win · Mac · Linux','Скачивает видео и аудио с YouTube и сотен других сайтов из терминала.','Забрать запись своего эфира или вебинара, чтобы нарезать рилсы. Только свой контент или с разрешения автора!',['Установи:','$ pip install -U yt-dlp','Скачай видео:','$ yt-dlp "ссылка-на-видео"']],
+[5,'obsproject/obs-studio','OBS Studio',1,'Win · Mac · Linux','Стандарт для записи экрана и прямых эфиров: сцены, камера, презентация, плашки.','Записать урок или провести эфир как профи, а не «а вы меня видите?».',['Скачай с obsproject.com.','Пройди мастер автонастройки при первом запуске.','Добавь источники: «Захват экрана» и камеру.']],
+[5,'Stirling-Tools/Stirling-PDF','Stirling PDF',3,'Docker или Desktop','Швейцарский нож для PDF: склеить, разрезать, сжать, повернуть, распознать текст, подписать.','Работать с договорами и КП без подозрительных онлайн-сервисов, куда утекают документы.',['Через Docker:','$ docker run -d -p 8080:8080 stirlingtools/stirling-pdf:latest','Открой http://localhost:8080. Есть и десктоп-версия в Releases.']],
+[5,'excalidraw/excalidraw','Excalidraw',1,'Браузер','Онлайн-доска с рисунками «от руки»: схемы, воронки, карты процессов. Можно рисовать вместе.','Нарисовать воронку продаж на созвоне так, что все наконец поймут.',['Ничего не ставь — просто открой excalidraw.com.']]
+];
+const MOCK={
+ 'All-Hands-AI/OpenHands':['$ docker run … openhands','<span class="c">› Agent: читаю задачу…</span>','<span class="c">› Agent: создал app.py, запускаю тесты</span>','✔ 12 passed'],
+ 'github/spec-kit':['$ specify init мой-проект','<span class="c">✔ шаблоны спецификации созданы</span>','/specify  /plan  /tasks','<span class="c">› сначала ТЗ, потом код</span>'],
+ 'microsoft/markitdown':['$ markitdown прайс.pdf > прайс.md','<span class="c"># Прайс 2026</span>','| Услуга | Цена |','| Аудит  | 30 000 |'],
+ 'ollama/ollama':['$ ollama run gemma3','<span class="c">pulling manifest… success</span>','>>> Напиши оффер для курса','Конечно! Вот 3 варианта…'],
+ 'open-webui/open-webui':['$ open-webui serve','<span class="c">INFO: Uvicorn running on</span>','http://localhost:8080','<span class="c">› чат как у ChatGPT, но твой</span>'],
+ 'danny-avila/LibreChat':['$ docker compose up -d','<span class="c">✔ Container LibreChat  Started</span>','http://localhost:3080','<span class="c">› Claude · GPT · Gemini в одном окне</span>'],
+ 'comfyanonymous/ComfyUI':['[Load Checkpoint] → [Prompt]','        ↓','[KSampler] → [Save Image]','<span class="c">› граф генерации из блоков</span>'],
+ 'unclecode/crawl4ai':['$ crwl https://example.com -o markdown','<span class="c"># Example Domain</span>','This domain is for use in…','<span class="c">✔ 1 page → markdown</span>'],
+ 'umami-software/umami':['Посетители   1 284  ▲ 12%','Источник     instagram.com','Страница     /praktikum','<span class="c">› аналитика без кук</span>'],
+ 'yt-dlp/yt-dlp':['$ yt-dlp "ссылка-на-эфир"','[youtube] Extracting URL','[download] 100% of 412.3MiB','<span class="c">✔ готово к нарезке</span>'],
+ 'obsproject/obs-studio':['● REC 00:12:45','Сцены: Эфир · Экран · Камера','Источники: Захват экрана, Webcam','<span class="c">› стрим как у профи</span>']
+};
+const LV=['','Скачал и запустил','Одна команда','Docker'];
+const slug=r=>r.replace('/','__').toLowerCase();
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const pad=n=>String(n).padStart(2,'0');
+const step=s=>s.startsWith('$ ')?`<li><div class="cmd"><code>${esc(s.slice(2))}</code><button type="button" class="cp" aria-label="Скопировать команду">Копировать</button></div></li>`:`<li>${esc(s)}</li>`;
+let n=0;
+document.getElementById('list').innerHTML=CATS.map((c,i)=>`
+<section class="band cat" id="c${i+1}"><div class="wrap">
+ <div class="hd"><div class="num">${i+1}</div><div><h2 class="h2">${c.t}</h2><p>${c.s}</p></div></div>
+ <div class="grid">${R.filter(r=>r[0]===i+1).map(r=>{n++;const has=IMGS.includes(slug(r[1]));const m=MOCK[r[1]];
+  return `<article class="card" data-c="${r[0]}" data-l="${r[3]}" data-q="${esc((r[2]+' '+r[1]+' '+r[5]+' '+r[6]).toLowerCase())}">
+   <div class="shot"><div class="chrome"><i></i><i></i><i></i><span>github.com/${r[1]}</span></div><div class="im">${has?`<img loading="lazy" src="img/${slug(r[1])}.webp" alt="Как выглядит ${esc(r[2])}">`:`<div class="mock">${(m||['$ '+r[2].toLowerCase()]).map((l,k)=>k===0?`<span class="p">${l}</span>`:l).join('<br>')}<span class="tag">${r[3]===1?'схема интерфейса':'так это выглядит в терминале'}</span></div>`}</div></div>
+   <div class="body">
+    <div class="top"><div><h3>${r[2]}</h3><div class="repo">${r[1]}</div></div><div class="no">№${pad(n)}</div></div>
+    <p>${r[5]}</p>
+    <div class="why"><b>Зачем тебе:</b> ${r[6]}</div>
+    <div class="meta"><span class="dot d${r[3]}"><b></b>${LV[r[3]]}</span><span>${r[4]}</span><span>0 ₽</span></div>
+    <details><summary>Как установить</summary><ol>${r[7].map(step).join('')}</ol></details>
+    <div class="go"><a class="btn" href="https://github.com/${r[1]}">Открыть на GitHub →</a></div>
+   </div></article>`}).join('')}</div>
+ ${c.ins?`<div class="ins${c.pk?' pk':''}"><div class="em">${c.ins[0]}</div><div><b>${c.ins[1]}</b><p>${c.ins[2]}</p></div></div>`:''}
+</div></section>`).join('');
+
+/* filters */
+const cats=document.getElementById('cats');
+cats.innerHTML=`<button class="chip" data-c="0" aria-pressed="true">Все 50</button>`+CATS.map((c,i)=>`<button class="chip" data-c="${i+1}" aria-pressed="false">${c.t}</button>`).join('');
+let FC=0,FL=0,Q='';
+const cards=[...document.querySelectorAll('.card')];
+const apply=()=>{let v=0;cards.forEach(el=>{const ok=(!FC||el.dataset.c==FC)&&(!FL||el.dataset.l==FL)&&(!Q||el.dataset.q.includes(Q));el.classList.toggle('hide',!ok);if(ok)v++});
+ document.querySelectorAll('.cat').forEach(s=>s.style.display=s.querySelector('.card:not(.hide)')?'':'none');
+ document.getElementById('cnt').textContent=v+' из 50';document.getElementById('empty').style.display=v?'none':'block';
+ if(window.ScrollTrigger)ScrollTrigger.refresh()};
+cats.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;FC=+b.dataset.c;cats.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));apply();
+ const t=FC?document.getElementById('c'+FC):document.getElementById('list');t.scrollIntoView({behavior:'smooth'})});
+document.querySelectorAll('[data-l]').forEach(b=>b.tagName==='BUTTON'&&b.addEventListener('click',()=>{FL=+b.dataset.l;document.querySelectorAll('button[data-l]').forEach(x=>x.setAttribute('aria-pressed',x===b));apply()}));
+document.getElementById('q').addEventListener('input',e=>{Q=e.target.value.trim().toLowerCase();apply()});
+
+/* copy */
+const toast=document.getElementById('toast');let tt;
+const say=t=>{toast.textContent=t;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),1600)};
+document.addEventListener('click',e=>{const b=e.target.closest('.cp');if(!b)return;const code=b.previousElementSibling;const txt=code.textContent;
+ const fb=()=>{const r=document.createRange();r.selectNodeContents(code);const s=getSelection();s.removeAllRanges();s.addRange(r);say('Выделила — жми Ctrl+C')};
+ try{navigator.clipboard.writeText(txt).then(()=>{b.textContent='✓';say('Команда скопирована');setTimeout(()=>b.textContent='Копировать',1400)},fb)}catch(err){fb()}});
+
+/* marquee text */
+document.getElementById('mqt').textContent=(R.map(r=>r[2].toUpperCase()).join(' · ')+' · ').repeat(2);
+
+/* terminal typing */
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lines=[['p','$ '],['t','git clone топ-50-решений'],['n',''],['c','Cloning into "твоя-новая-жизнь"...'],['n',''],['c','✔ 14 ИИ-агентов'],['n',''],['c','✔ 8 нейросетей у себя на компе'],['n',''],['c','✔ 8 автоматизаций'],['n',''],['c','✔ 9 сервисов для бизнеса'],['n',''],['c','✔ 11 утилит'],['n',''],['k','Итого: 0 ₽. Подписки плачут.'],['n',''],['p','$ ']];
+const tp=document.getElementById('tp');
+const full=()=>lines.map(([k,t])=>k==='n'?'\n':`<span class="${k==='c'?'':k}">${esc(t)}</span>`).join('')+'<span class="caret"></span>';
+if(still){tp.innerHTML=full()}else{let html='',li=0,ci=0;
+ const tick=()=>{if(li>=lines.length){tp.innerHTML=html+'<span class="caret"></span>';return}
+  const [k,t]=lines[li];if(k==='n'){html+='\n';li++;setTimeout(tick,k==='n'&&lines[li-2]&&lines[li-2][0]==='c'?260:60);return}
+  if(k==='t'){ci++;tp.innerHTML=html+`<span>${esc(t.slice(0,ci))}</span><span class="caret"></span>`;if(ci>=t.length){html+=`<span>${esc(t)}</span>`;li++;ci=0;setTimeout(tick,500)}else setTimeout(tick,45);return}
+  html+=`<span class="${k==='c'?'':k}">${esc(t)}</span>`;li++;tp.innerHTML=html+'<span class="caret"></span>';setTimeout(tick,120)};
+ setTimeout(tick,700)}
+
+if(window.gsap&&window.ScrollTrigger&&!still){
+ gsap.registerPlugin(ScrollTrigger);
+ gsap.timeline({defaults:{ease:'power3.out'}})
+  .from('.hero h1',{y:60,opacity:0,duration:.8})
+  .from('#n50',{scale:3,rotate:-20,duration:.9,ease:'back.out(2)'},'-=.5')
+  .from('.lead,.hero .acts,.by',{y:24,opacity:0,stagger:.1,duration:.6},'-=.5')
+  .from('.term',{y:60,rotate:3,opacity:0,duration:.9},'-=.8')
+  .from('.fan img',{y:120,opacity:0,rotate:0,stagger:.12,duration:.9,ease:'back.out(1.4)'},'-=.5');
+ gsap.to('.fan img:nth-child(2)',{y:-10,duration:2,yoyo:true,repeat:-1,ease:'sine.inOut'});
+ gsap.to('.fan',{yPercent:-25,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+ gsap.fromTo('#mqt',{xPercent:0},{xPercent:-30,ease:'none',scrollTrigger:{trigger:'.mq',start:'top bottom',end:'bottom top',scrub:.6}});
+ gsap.utils.toArray('.rv').forEach(el=>gsap.from(el,{y:40,opacity:0,duration:.7,scrollTrigger:{trigger:el,start:'top 88%'}}));
+ gsap.utils.toArray('.three,.how').forEach(g=>gsap.from(g.children,{y:60,rotate:i=>[-4,2,4][i],opacity:0,stagger:.12,duration:.7,ease:'back.out(1.5)',scrollTrigger:{trigger:g,start:'top 82%'}}));
+ gsap.utils.toArray('.cat').forEach(s=>{
+  gsap.from(s.querySelector('.num'),{xPercent:-60,opacity:0,rotate:-15,duration:.9,ease:'back.out(1.6)',scrollTrigger:{trigger:s,start:'top 78%'}});
+  gsap.from(s.querySelectorAll('.hd h2,.hd p'),{y:30,opacity:0,stagger:.1,duration:.6,scrollTrigger:{trigger:s,start:'top 78%'}});
+  const ins=s.querySelector('.ins');if(ins)gsap.from(ins,{scale:.85,rotate:-5,opacity:0,duration:.8,ease:'back.out(1.6)',scrollTrigger:{trigger:ins,start:'top 90%'}});
+ });
+ ScrollTrigger.batch('.card',{start:'top 92%',once:true,onEnter:b=>gsap.from(b,{y:80,opacity:0,stagger:.08,duration:.7,ease:'power3.out'})});
+ gsap.from('.final .btn.pk',{scale:.6,opacity:0,duration:.8,ease:'elastic.out(1,.5)',scrollTrigger:{trigger:'#cta',start:'top 70%'}});
+ gsap.to('.final .btn.pk',{scale:1.05,duration:.8,yoyo:true,repeat:-1,ease:'sine.inOut',delay:1});
+ gsap.to('.glow',{scale:1.3,duration:3,yoyo:true,repeat:-1,ease:'sine.inOut'});
+ window.addEventListener('load',()=>ScrollTrigger.refresh());
+}
+}
+</script>
+</body>
+</html>
